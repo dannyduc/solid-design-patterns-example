@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SOLID design principles</title>
+    <link rel="stylesheet" href="css/main.css"/>
+    <script src="vendor/jquery2.js"></script>
+    <script src="vendor/mustache.js"></script>
+    <script src="vendor/underscore.js"></script>
+    <script src="vendor/backbone.js"></script>
+
+    <script src="js/models/range.js"></script>
+    <script src="js/models/hour_range.js"></script>
+
+    <script src="js/collections/hour_range_list.js"></script>
+    <script src="js/collections/range_list.js"></script>
+
+    <script src="js/models/plan.js"></script>
+
+    <script src="js/views/range.js"></script>
+    <script src="js/views/range_list.js"></script>
+    <script src="js/views/plan.js"></script>
+    <script src="js/views/hour_range.js"></script>
+    <script src="js/views/hour_range_list.js"></script>
+
+    <script src="js/app.js"></script>
+    <script>
+        $(function() {
+            var app = new App();
+            app.init();
+        });
+    </script>
+</head>
+<body>
+<div id="bucket">
+    <div id="main">
+        <h1>Describe your rental plan</h1>
+        <form action="#" method="post" id="plan" class="plan">
+            <fieldset class="plan plan-rangelist"></fieldset>
+            <p>
+                <button>Create rental plan</button>
+                <a class="button weak" href="/">Jump to the original implementation</a>
+            </p>
+        </form>
+    </div>
+</div>
+
+<script type="text/template" id="range-template">
+    <p>
+        <label for="fare-from-amount">How many days?</label>
+        <input type="text" value="{{start}}"
+                class="import-start"
+                id="fare-from-amount"
+                name="fare-from-amount"
+                size="2"
+                />
+        &rarr;
+        <input type="text" value="{{end}}"
+               name="fare-to-amount"
+               id="fare-to-amount"
+               size="2"
+               class="plan-end"
+                />
+        <label for="fare-value">Value</label>
+        <input type="text" value="{{value}}"
+               name="fare-value"
+               id="fare-value"
+               size="3"
+                />
+        &euro;
+        /
+        <select>
+            <option>fixed</option>
+            <option>daily</option>
+        </select>
+
+        <a href="#" class="button inline remove plan-remove">&#x2718;</a>
+    </p>
+    <p class="settings-24">
+        <label for="">Unit</label>
+        <label>
+            <input type='radio' name='imports[0].children_type' value='HOURS' checked="checked"/>
+            Hours
+        </label>
+        <label>
+            <input type='radio' name='imports[0].children_type' value='MINUTES'/>
+            Minutes
+        </label>
+    </p>
+    <div class="plan-24"></div>
+</script>
+<script type="text/template" id='hour-range-template'>
+    <input type='text'
+           name='imports[0].children[0].start'
+           size='2'
+           value="{{start}}"
+           class="import-start plan-24-start"
+            />
+    &rarr;
+    <input type='text'
+           name='imports[0].children[0].end'
+           size='2'
+           value="{{end}}"
+           class="import-end plan-24-end"
+            />
+    =
+    <input type='text'
+           name='imports[0].children[0].amount'
+           size='2'
+            />
+    &euro;
+    <a href="#" class="button inline remove plan-24-remove">&#x2718;</a>
+</script>
+</body>
+</html>
